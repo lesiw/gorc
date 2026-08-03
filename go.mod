@@ -23,7 +23,7 @@ require (
 	golang.org/x/telemetry v0.0.0-20260708182218-49f421fb7959 // indirect
 	golang.org/x/tools v0.48.0 // indirect
 	lesiw.io/checker v0.16.0 // indirect
-	lesiw.io/clerk v0.2.1-0.20260726115654-97532659cfda // indirect
+	lesiw.io/clerk v0.3.0 // indirect
 	lesiw.io/errcheck v1.0.0 // indirect
 	lesiw.io/linelen v0.4.0 // indirect
 	lesiw.io/plscheck v0.20.0 // indirect
