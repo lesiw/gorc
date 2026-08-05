@@ -66,8 +66,8 @@ var (
 
 func main() {
 	if err := run(context.Background()); err != nil {
-		cmdErr, ok := errors.AsType[*command.Error](err)
-		if ok && cmdErr.Code != 0 {
+		var cmdErr *command.Error
+		if errors.As(err, &cmdErr) && cmdErr.Code != 0 {
 			os.Exit(cmdErr.Code)
 		}
 		fmt.Fprintln(os.Stderr, err)

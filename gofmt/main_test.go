@@ -269,8 +269,8 @@ func TestDiffMode(t *testing.T) {
 		t.Fatal(err)
 	}
 	err = run(ctx)
-	cmdErr, ok := errors.AsType[*command.Error](err)
-	if !ok || cmdErr.Code != 1 {
+	var cmdErr *command.Error
+	if !errors.As(err, &cmdErr) || cmdErr.Code != 1 {
 		t.Fatalf("run() = %v; want exit code 1", err)
 	}
 	want := string(diff.Diff(

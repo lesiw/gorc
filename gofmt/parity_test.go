@@ -74,7 +74,8 @@ func TestParity(t *testing.T) {
 		var out, errs bytes.Buffer
 		cmd.Stdout, cmd.Stderr = &out, &errs
 		err := cmd.Run()
-		exitErr, ok := errors.AsType[*exec.ExitError](err)
+		var exitErr *exec.ExitError
+		ok := errors.As(err, &exitErr)
 		if err != nil && !ok {
 			t.Fatalf("gofmt %v: %v\n%s", args, err, errs.String())
 		}
@@ -94,7 +95,8 @@ func TestParity(t *testing.T) {
 		var out strings.Builder
 		swap(t, &stdout, io.Writer(&out))
 		err := run(t.Context())
-		cmdErr, ok := errors.AsType[*command.Error](err)
+		var cmdErr *command.Error
+		ok := errors.As(err, &cmdErr)
 		if err != nil && !ok {
 			t.Fatalf("run() = %v; want nil", err)
 		}

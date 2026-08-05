@@ -1,6 +1,6 @@
 module lesiw.io/gorc
 
-go 1.26.0
+go 1.25.0
 
 tool (
 	golang.org/x/tools/cmd/goimports
