@@ -4,6 +4,8 @@ on:
     branches: [main, next]
   pull_request:
   workflow_dispatch:
+env:
+  GOTOOLCHAIN: local
 jobs:
   fmt:
     runs-on: ubuntu-latest
