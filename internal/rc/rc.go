@@ -90,10 +90,12 @@ func stamp(cmds []Command, src string) {
 }
 
 func parseVerbs(r io.Reader, expand func(string) string) (map[string][]Command, error) {
-	rc := make(map[string][]Command)
-	scn := bufio.NewScanner(r)
-	var verb string
-	var block bool
+	var (
+		rc    = make(map[string][]Command)
+		scn   = bufio.NewScanner(r)
+		verb  string
+		block bool
+	)
 	for n := 1; scn.Scan(); n++ {
 		words, err := split(expand(scn.Text()))
 		if err != nil {
@@ -129,8 +131,10 @@ func parseVerbs(r io.Reader, expand func(string) string) (map[string][]Command, 
 }
 
 func parseList(r io.Reader, expand func(string) string) ([]Command, error) {
-	var cmds []Command
-	scn := bufio.NewScanner(r)
+	var (
+		cmds []Command
+		scn  = bufio.NewScanner(r)
+	)
 	for n := 1; scn.Scan(); n++ {
 		words, err := split(expand(scn.Text()))
 		if err != nil {

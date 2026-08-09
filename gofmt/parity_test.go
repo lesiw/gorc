@@ -109,9 +109,11 @@ func TestParity(t *testing.T) {
 	}
 	for _, tt := range parityTests {
 		t.Run(tt.name, func(t *testing.T) {
-			theirs, dir := setup(t), setup(t)
-			want, wantCode := vanilla(t, theirs, tt.stdin, tt.args...)
-			got, gotCode := ours(t, dir, tt.stdin, tt.args...)
+			var (
+				theirs, dir    = setup(t), setup(t)
+				want, wantCode = vanilla(t, theirs, tt.stdin, tt.args...)
+				got, gotCode   = ours(t, dir, tt.stdin, tt.args...)
+			)
 			if got != want {
 				t.Errorf("output = %q; want %q", got, want)
 			}

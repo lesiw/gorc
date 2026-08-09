@@ -10,7 +10,8 @@ import (
 	"lesiw.io/command/mock"
 )
 
-const buildHelp = `usage: go build [-o output] [build flags] [packages]
+const (
+	buildHelp = `usage: go build [-o output] [build flags] [packages]
 
 Build compiles the packages named by the import paths.
 
@@ -21,8 +22,7 @@ Build compiles the packages named by the import paths.
 	-p n
 		the number of programs that can be run in parallel.
 `
-
-const testHelp = `The following flags are recognized by the go test command.
+	testHelp = `The following flags are recognized by the go test command.
 
 	-bench regexp
 		Run only those benchmarks matching a regular expression.
@@ -31,6 +31,7 @@ const testHelp = `The following flags are recognized by the go test command.
 	-race
 		This flag also appears in build flags.
 `
+)
 
 func TestLoad(t *testing.T) {
 	mm := new(mock.Machine)

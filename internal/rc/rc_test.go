@@ -255,8 +255,10 @@ func TestAssignment(t *testing.T) {
 }
 
 func TestFindDir(t *testing.T) {
-	fsys := memfs.New()
-	ctx := fs.WithWorkDir(t.Context(), "/a/b/c")
+	var (
+		fsys = memfs.New()
+		ctx  = fs.WithWorkDir(t.Context(), "/a/b/c")
+	)
 	if err := fs.MkdirAll(ctx, fsys, "/a/b/c"); err != nil {
 		t.Fatal(err)
 	}
@@ -270,8 +272,10 @@ func TestFindDir(t *testing.T) {
 }
 
 func TestFindDirSecondName(t *testing.T) {
-	fsys := memfs.New()
-	ctx := fs.WithWorkDir(t.Context(), "/a/b")
+	var (
+		fsys = memfs.New()
+		ctx  = fs.WithWorkDir(t.Context(), "/a/b")
+	)
 	if err := fs.MkdirAll(ctx, fsys, "/a/b"); err != nil {
 		t.Fatal(err)
 	}
@@ -285,16 +289,20 @@ func TestFindDirSecondName(t *testing.T) {
 }
 
 func TestFindDirNone(t *testing.T) {
-	fsys := memfs.New()
-	ctx := fs.WithWorkDir(t.Context(), "/a/b/c")
+	var (
+		fsys = memfs.New()
+		ctx  = fs.WithWorkDir(t.Context(), "/a/b/c")
+	)
 	if got := FindDir(ctx, fsys, "go.rc"); got != "" {
 		t.Errorf("FindDir() = %q; want %q", got, "")
 	}
 }
 
 func TestParseFileStampsSource(t *testing.T) {
-	fsys := memfs.New()
-	ctx := fs.WithWorkDir(t.Context(), "/work")
+	var (
+		fsys = memfs.New()
+		ctx  = fs.WithWorkDir(t.Context(), "/work")
+	)
 	if err := fs.MkdirAll(ctx, fsys, "/work"); err != nil {
 		t.Fatal(err)
 	}
@@ -316,8 +324,10 @@ func TestParseFileStampsSource(t *testing.T) {
 }
 
 func TestParseListFileStampsSource(t *testing.T) {
-	fsys := memfs.New()
-	ctx := fs.WithWorkDir(t.Context(), "/work")
+	var (
+		fsys = memfs.New()
+		ctx  = fs.WithWorkDir(t.Context(), "/work")
+	)
 	if err := fs.MkdirAll(ctx, fsys, "/work"); err != nil {
 		t.Fatal(err)
 	}
@@ -337,8 +347,10 @@ func TestParseListFileStampsSource(t *testing.T) {
 }
 
 func TestParseFileMissing(t *testing.T) {
-	fsys := memfs.New()
-	ctx := fs.WithWorkDir(t.Context(), "/work")
+	var (
+		fsys = memfs.New()
+		ctx  = fs.WithWorkDir(t.Context(), "/work")
+	)
 	cmds, err := ParseFile(ctx, fsys, "/work/go.rc",
 		func(s string) string { return s },
 	)

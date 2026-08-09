@@ -276,8 +276,10 @@ var splitArgsTests = []struct {
 
 func TestSplitArgs(t *testing.T) {
 	for _, tt := range splitArgsTests {
-		goargs, goflags := splitArgs(arity.Table, tt.in)
-		opt := cmpopts.EquateEmpty()
+		var (
+			goargs, goflags = splitArgs(arity.Table, tt.in)
+			opt             = cmpopts.EquateEmpty()
+		)
 		if !cmp.Equal(tt.goargs, goargs, opt) {
 			t.Errorf("splitArgs(%q) goargs: -want +got\n%s",
 				tt.in, cmp.Diff(tt.goargs, goargs, opt),

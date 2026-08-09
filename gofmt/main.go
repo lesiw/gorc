@@ -92,8 +92,10 @@ type formatter struct {
 }
 
 func intercept(ctx context.Context, name string) error {
-	flags := flag.NewFlagSet("gofmt", flag.ContinueOnError)
-	var f formatter
+	var (
+		flags = flag.NewFlagSet("gofmt", flag.ContinueOnError)
+		f     formatter
+	)
 	flags.BoolVar(&f.list, "l", false, "list files whose formatting differs")
 	flags.BoolVar(&f.write, "w", false, "write result to (source) file")
 	flags.BoolVar(&f.diff, "d", false, "display diffs instead of rewriting")
