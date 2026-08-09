@@ -49,13 +49,12 @@ func TestFindOnlySelf(t *testing.T) {
 var displayTests = []struct {
 	in   []string
 	want string
-}{
-	{[]string{"go", "test", "-count=5"}, "go test -count=5"},
-	{[]string{"go", "run", ".", "hello world"},
-		`go run . "hello world"`},
-	{[]string{"A=x y", "go"}, `"A=x y" go`},
-	{[]string{""}, `""`},
-}
+}{{[]string{"go", "test", "-count=5"}, "go test -count=5"}, {[]string{
+	"go", "run", ".", "hello world",
+},
+	`go run . "hello world"`}, {
+	[]string{"A=x y", "go"}, `"A=x y" go`,
+}, {[]string{""}, `""`}}
 
 func TestDisplay(t *testing.T) {
 	for _, tt := range displayTests {

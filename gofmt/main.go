@@ -120,7 +120,8 @@ func intercept(ctx context.Context, name string) error {
 		displays[i] = shim.Display(slices.Concat(c.Env, c.Arg))
 	}
 	_, err = shim.Fprintf(stderr,
-		"%s: %s\n", cmds[0].Src, strings.Join(displays, " | "))
+		"%s: %s\n", cmds[0].Src, strings.Join(displays, " | "),
+	)
 	if err != nil {
 		return err
 	}
@@ -193,8 +194,7 @@ func gather(ctx context.Context, args []string) (files []string, err error) {
 				continue
 			}
 			if strings.HasSuffix(name, ".go") {
-				found = append(found,
-					strings.TrimPrefix(entry.Path(), "./"))
+				found = append(found, strings.TrimPrefix(entry.Path(), "./"))
 			}
 		}
 		slices.Sort(found)

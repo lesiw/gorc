@@ -32,7 +32,8 @@ func TestInterruptReachesChildren(t *testing.T) {
 	ctx, cancel := context.WithTimeout(t.Context(), 5*time.Second)
 	t.Cleanup(cancel)
 	cmd := exec.CommandContext(ctx, exe,
-		"-test.run", "TestInterruptReachesChildren")
+		"-test.run", "TestInterruptReachesChildren",
+	)
 	cmd.Env = append(os.Environ(), "GORC_TEST_BLOCK=1")
 	if err := cmd.Start(); err != nil {
 		t.Fatal(err)

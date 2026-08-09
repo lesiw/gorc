@@ -192,8 +192,7 @@ func TestRun(t *testing.T) {
 				t.Fatal(err)
 			}
 			if tt.rc != "" {
-				err := fs.WriteFile(ctx, fsys,
-					"/work/go.fmt", []byte(tt.rc))
+				err := fs.WriteFile(ctx, fsys, "/work/go.fmt", []byte(tt.rc))
 				if err != nil {
 					t.Fatal(err)
 				}
@@ -227,7 +226,8 @@ func TestRun(t *testing.T) {
 			}
 			if !cmp.Equal(tt.calls, mm.Calls, opts...) {
 				t.Errorf("calls: -want +got\n%s",
-					cmp.Diff(tt.calls, mm.Calls, opts...))
+					cmp.Diff(tt.calls, mm.Calls, opts...),
+				)
 			}
 			if got := out.String(); got != tt.out {
 				t.Errorf("stdout = %q; want %q", got, tt.out)
@@ -274,7 +274,8 @@ func TestDiffMode(t *testing.T) {
 		t.Fatalf("run() = %v; want exit code 1", err)
 	}
 	want := string(diff.Diff(
-		"/work/a.go.orig", []byte("a\n"), "/work/a.go", []byte("b\n")))
+		"/work/a.go.orig", []byte("a\n"), "/work/a.go", []byte("b\n"),
+	))
 	if got := out.String(); got != want {
 		t.Errorf("stdout = %q; want %q", got, want)
 	}

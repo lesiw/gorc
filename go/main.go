@@ -108,7 +108,8 @@ func run(ctx context.Context) error {
 	}
 	for _, c := range cmds {
 		_, err := shim.Fprintf(stderr,
-			"%s: %s\n", c.Src, shim.Display(slices.Concat(c.Env, c.Arg)))
+			"%s: %s\n", c.Src, shim.Display(slices.Concat(c.Env, c.Arg)),
+		)
 		if err != nil {
 			return err
 		}

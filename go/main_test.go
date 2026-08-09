@@ -170,7 +170,8 @@ func TestRun(t *testing.T) {
 			}
 			if tt.local != "" {
 				err := fs.WriteFile(ctx, fsys,
-					"/work/go.local.rc", []byte(tt.local))
+					"/work/go.local.rc", []byte(tt.local),
+				)
 				if err != nil {
 					t.Fatal(err)
 				}
@@ -186,7 +187,8 @@ func TestRun(t *testing.T) {
 			opt := cmpopts.EquateEmpty()
 			if !cmp.Equal(tt.calls, mm.Calls, opt) {
 				t.Errorf("calls: -want +got\n%s",
-					cmp.Diff(tt.calls, mm.Calls, opt))
+					cmp.Diff(tt.calls, mm.Calls, opt),
+				)
 			}
 			if execCalled != (tt.exec != nil) {
 				t.Errorf("passthrough = %v; want %v",
@@ -194,7 +196,8 @@ func TestRun(t *testing.T) {
 			}
 			if !cmp.Equal(tt.exec, execArgs, opt) {
 				t.Errorf("exec args: -want +got\n%s",
-					cmp.Diff(tt.exec, execArgs, opt))
+					cmp.Diff(tt.exec, execArgs, opt),
+				)
 			}
 		})
 	}
@@ -277,11 +280,13 @@ func TestSplitArgs(t *testing.T) {
 		opt := cmpopts.EquateEmpty()
 		if !cmp.Equal(tt.goargs, goargs, opt) {
 			t.Errorf("splitArgs(%q) goargs: -want +got\n%s",
-				tt.in, cmp.Diff(tt.goargs, goargs, opt))
+				tt.in, cmp.Diff(tt.goargs, goargs, opt),
+			)
 		}
 		if !cmp.Equal(tt.goflags, goflags, opt) {
 			t.Errorf("splitArgs(%q) goflags: -want +got\n%s",
-				tt.in, cmp.Diff(tt.goflags, goflags, opt))
+				tt.in, cmp.Diff(tt.goflags, goflags, opt),
+			)
 		}
 	}
 }
@@ -320,7 +325,8 @@ func TestExpand(t *testing.T) {
 		got := expand(tt.line, tt.goargs, tt.goflags)
 		if got != tt.want {
 			t.Errorf("expand(%q, %q, %q) = %q; want %q", tt.line,
-				tt.goargs, tt.goflags, got, tt.want)
+				tt.goargs, tt.goflags, got, tt.want,
+			)
 		}
 	}
 }

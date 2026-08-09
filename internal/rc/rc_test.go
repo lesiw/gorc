@@ -128,11 +128,13 @@ func TestParseVerbs(t *testing.T) {
 			if tt.wantErr != "" {
 				if err == nil {
 					t.Fatalf("parseVerbs(%q): want error %q, got nil",
-						tt.in, tt.wantErr)
+						tt.in, tt.wantErr,
+					)
 				}
 				if !strings.Contains(err.Error(), tt.wantErr) {
 					t.Fatalf("parseVerbs(%q): want error %q, got %q",
-						tt.in, tt.wantErr, err)
+						tt.in, tt.wantErr, err,
+					)
 				}
 				return
 			}
@@ -141,7 +143,8 @@ func TestParseVerbs(t *testing.T) {
 			}
 			if !cmp.Equal(tt.want, rc) {
 				t.Errorf("parseVerbs(%q): -want +got\n%s",
-					tt.in, cmp.Diff(tt.want, rc))
+					tt.in, cmp.Diff(tt.want, rc),
+				)
 			}
 		})
 	}
@@ -198,11 +201,13 @@ func TestParseList(t *testing.T) {
 			if tt.wantErr != "" {
 				if err == nil {
 					t.Fatalf("parseList(%q): want error %q, got nil",
-						tt.in, tt.wantErr)
+						tt.in, tt.wantErr,
+					)
 				}
 				if !strings.Contains(err.Error(), tt.wantErr) {
 					t.Fatalf("parseList(%q): want error %q, got %q",
-						tt.in, tt.wantErr, err)
+						tt.in, tt.wantErr, err,
+					)
 				}
 				return
 			}
@@ -211,7 +216,8 @@ func TestParseList(t *testing.T) {
 			}
 			if !cmp.Equal(tt.want, cmds) {
 				t.Errorf("parseList(%q): -want +got\n%s",
-					tt.in, cmp.Diff(tt.want, cmds))
+					tt.in, cmp.Diff(tt.want, cmds),
+				)
 			}
 		})
 	}
@@ -242,7 +248,8 @@ func TestAssignment(t *testing.T) {
 		got, ok := assignment(tt.in)
 		if got != tt.want || ok != tt.ok {
 			t.Errorf("assignment(%q) = %q, %v; want %q, %v",
-				tt.in, got, ok, tt.want, tt.ok)
+				tt.in, got, ok, tt.want, tt.ok,
+			)
 		}
 	}
 }
@@ -292,12 +299,14 @@ func TestParseFileStampsSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	err := fs.WriteFile(ctx, fsys, "/work/go.local.rc",
-		[]byte("test go test\n"))
+		[]byte("test go test\n"),
+	)
 	if err != nil {
 		t.Fatal(err)
 	}
 	cmds, err := ParseFile(ctx, fsys, "/work/go.local.rc",
-		func(s string) string { return s })
+		func(s string) string { return s },
+	)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -317,7 +326,8 @@ func TestParseListFileStampsSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	cmds, err := ParseListFile(ctx, fsys, "/work/go.fmt",
-		func(s string) string { return s })
+		func(s string) string { return s },
+	)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -330,7 +340,8 @@ func TestParseFileMissing(t *testing.T) {
 	fsys := memfs.New()
 	ctx := fs.WithWorkDir(t.Context(), "/work")
 	cmds, err := ParseFile(ctx, fsys, "/work/go.rc",
-		func(s string) string { return s })
+		func(s string) string { return s },
+	)
 	if err != nil {
 		t.Fatalf("ParseFile() = %v; want nil", err)
 	}

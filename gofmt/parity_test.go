@@ -56,7 +56,8 @@ func TestParity(t *testing.T) {
 		}
 		for name, content := range files {
 			err := os.WriteFile(filepath.Join(dir, name),
-				[]byte(content), 0o644)
+				[]byte(content), 0o644,
+			)
 			if err != nil {
 				t.Fatal(err)
 			}
