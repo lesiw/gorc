@@ -130,11 +130,8 @@ func parseVerbs(r io.Reader, expand func(string) string) (map[string][]Command, 
 	return rc, nil
 }
 
-func parseList(r io.Reader, expand func(string) string) ([]Command, error) {
-	var (
-		cmds []Command
-		scn  = bufio.NewScanner(r)
-	)
+func parseList(r io.Reader, expand func(string) string) (cmds []Command, err error) {
+	scn := bufio.NewScanner(r)
 	for n := 1; scn.Scan(); n++ {
 		words, err := split(expand(scn.Text()))
 		if err != nil {
@@ -157,8 +154,7 @@ func parseList(r io.Reader, expand func(string) string) ([]Command, error) {
 
 // parseCommand separates leading environment variable assignments from the
 // program and its arguments.
-func parseCommand(words []string) (Command, error) {
-	var c Command
+func parseCommand(words []string) (c Command, err error) {
 	for len(words) > 0 {
 		env, ok := assignment(words[0])
 		if !ok {

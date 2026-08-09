@@ -66,7 +66,7 @@ func TestParity(t *testing.T) {
 	}
 	vanilla := func(
 		t *testing.T, dir, stdin string, args ...string,
-	) (string, int) {
+	) (output string, code int) {
 		t.Helper()
 		cmd := exec.Command(gofmt, args...)
 		cmd.Dir = dir
@@ -80,13 +80,14 @@ func TestParity(t *testing.T) {
 		if err != nil && !ok {
 			t.Fatalf("gofmt %v: %v\n%s", args, err, errs.String())
 		}
-		var code int
 		if ok {
 			code = exitErr.ExitCode()
 		}
 		return out.String(), code
 	}
-	ours := func(t *testing.T, dir, in string, args ...string) (string, int) {
+	ours := func(
+		t *testing.T, dir, in string, args ...string,
+	) (output string, code int) {
 		t.Helper()
 		t.Chdir(dir)
 		t.Setenv("GORC", "")
@@ -101,7 +102,6 @@ func TestParity(t *testing.T) {
 		if err != nil && !ok {
 			t.Fatalf("run() = %v; want nil", err)
 		}
-		var code int
 		if ok {
 			code = cmdErr.Code
 		}

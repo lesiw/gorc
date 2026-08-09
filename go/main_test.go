@@ -180,8 +180,8 @@ func TestRun(t *testing.T) {
 			if tt.err == "" && err != nil {
 				t.Fatalf("run() = %v; want nil", err)
 			}
-			if tt.err != "" && (err == nil ||
-				!strings.Contains(err.Error(), tt.err)) {
+			miss := err == nil || !strings.Contains(err.Error(), tt.err)
+			if tt.err != "" && miss {
 				t.Fatalf("run() = %v; want %q", err, tt.err)
 			}
 			opt := cmpopts.EquateEmpty()
